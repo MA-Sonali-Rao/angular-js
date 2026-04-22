@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Learn how to validate email addresses and required fields in AngularJS forms using built-in properties.">
+    <title>Blog 12: Form Validation</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        .error { color: #dd0031; font-weight: bold; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 12: Form Validation</h1>
+        <p>Validation ensures that the user enters the correct data before they can submit the form.</p>
+        
+        <h3>Validation Properties:</h3>
+        <ul>
+            <li><code>$dirty</code>: User has interacted with the field.</li>
+            <li><code>$invalid</code>: The field content is not valid.</li>
+            <li><code>$error</code>: Gives the specific error (like "email" or "required").</li>
+        </ul>
+        <p class="error">Example: If an email field doesn't have an "@" symbol, AngularJS can automatically show an error message!</p>
+        
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

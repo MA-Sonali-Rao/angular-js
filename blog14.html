@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="A guide to AngularJS services and how to share data and logic across multiple controllers.">
+    <title>Blog 14: AngularJS Services</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 14: Services and Dependency Injection</h1>
+        <p>In AngularJS, services are objects that are wired together using <strong>Dependency Injection (DI)</strong>. You can use services to organize and share code across your app.</p>
+        
+        <p><strong>Why use Services?</strong></p>
+        <ul>
+            <li>They are "Singletons," meaning they only exist once in your app.</li>
+            <li>They are perfect for keeping data consistent between different pages.</li>
+            <li>They keep your controllers "thin" and organized.</li>
+        </ul>
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

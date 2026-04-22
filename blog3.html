@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Put a short summary of this specific blog here.">
+    <title>Blog 3: The MVC Architecture</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        .highlight { background: #fff3f3; padding: 15px; border-left: 5px solid #dd0031; margin: 20px 0; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+    
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download Notes as PDF</button>
+        <h1>Blog 3: What is MVC?</h1>
+        <p>AngularJS is based on the <strong>MVC (Model-View-Controller)</strong> design pattern.</p>
+        
+        <div class="highlight">
+            <p><strong>Model:</strong> This is the data. (e.g., A user's name).</p>
+            <p><strong>View:</strong> This is what the user sees. (The HTML page).</p>
+            <p><strong>Controller:</strong> This is the brain. It connects the data to the view.</p>
+        </div>
+
+        <p>By separating these three, your code stays organized and professional—which is exactly what big companies look for!</p>
+        
+        <p class="back-link"><a href="index.html">← Back to Table of Contents</a></p>
+    </div>
+</body>
+</html>

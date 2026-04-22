@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="A simple explanation of how Two-Way Data Binding works in AngularJS with practical examples.">
+    <title>Blog 5: Two-Way Data Binding</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        .code-block { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 5px; font-family: monospace; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 5: Two-Way Data Binding</h1>
+        <p>This is the "magic" of Angular. When you change something in the Input box, it automatically updates the text on the screen without refreshing!</p>
+        
+        <div class="code-block">
+            &lt;input ng-model="name"&gt; <br>
+            &lt;h1&gt;Hello {{name}}&lt;/h1&gt;
+        </div>
+        <p>In this example, whatever the user types in the input is immediately shown in the H1 tag.</p>
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

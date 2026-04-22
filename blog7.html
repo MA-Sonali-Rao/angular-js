@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Master AngularJS expressions and learn how to format data using built-in filters like uppercase and currency.">
+    <title>Blog 7: Expressions & Filters</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        code { background: #f4f4f4; padding: 2px 5px; color: #d10028; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 7: Expressions & Filters</h1>
+        <p>Expressions are used to bind application data to HTML. They are written inside double braces: <code>{{ expression }}</code>.</p>
+        
+        <h3>What are Filters?</h3>
+        <p>Filters can be added to expressions to transform the data. For example:</p>
+        <ul>
+            <li><code>{{ name | uppercase }}</code> - Changes text to all caps.</li>
+            <li><code>{{ price | currency }}</code> - Formats a number as money.</li>
+            <li><code>{{ date | date:'fullDate' }}</code> - Formats a date nicely.</li>
+        </ul>
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

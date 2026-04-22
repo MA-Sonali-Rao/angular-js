@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Discover how to use ngRoute to create a Single Page Application that feels fast and seamless.">
+    <title>Blog 15: Single Page Applications</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        .spa-box { background: #fdf2f2; padding: 15px; border: 1px solid #f5c6cb; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 15: Introduction to Routing</h1>
+        <p>Routing allows you to navigate between different "views" in your app without the browser reloading the entire page.</p>
+        
+        <div class="spa-box">
+            <p><strong>The SPA Advantage:</strong></p>
+            <p>Since only a portion of the page is updated, the website feels incredibly fast to the user. This is how modern apps like Gmail and Facebook work!</p>
+        </div>
+        
+        <p>In Angular, we use the <code>ngRoute</code> module and the <code>$routeProvider</code> to map URLs to specific HTML templates.</p>
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

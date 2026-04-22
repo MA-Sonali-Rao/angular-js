@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Learn how to make your AngularJS application searchable by Google using SEO techniques.">
+    <title>Blog 19: SEO for Angular</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 19: Mastering SEO</h1>
+        <p>Since search engine crawlers struggle with JavaScript-heavy sites, we use specific techniques to ensure our Angular content is indexed.</p>
+        <ul>
+            <li><strong>Meta Tags:</strong> Using unique titles and descriptions for every page (like we did in this project!).</li>
+            <li><strong>Clean URLs:</strong> Removing the '#' from the URL to make it look professional.</li>
+            <li><strong>Sitemaps:</strong> Creating a list of all 20 blogs for Google to find easily.</li>
+        </ul>
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

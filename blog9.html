@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Learn how to hide, show, and disable HTML elements dynamically using ng-disabled, ng-show, and ng-hide.">
+    <title>Blog 9: HTML DOM Directives</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        .note { background: #fffbe6; border-left: 5px solid #ffe58f; padding: 10px; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 9: Controlling the DOM</h1>
+        <p>AngularJS has special directives to control HTML elements based on data conditions.</p>
+        
+        <ul>
+            <li><strong>ng-disabled:</strong> Disables a button or input field.</li>
+            <li><strong>ng-show:</strong> Shows an element only if a condition is true.</li>
+            <li><strong>ng-hide:</strong> Hides an element if a condition is true.</li>
+            <li><strong>ng-click:</strong> Tells Angular what to do when an element is clicked.</li>
+        </ul>
+
+        <div class="note">
+            <p><strong>SEO Tip:</strong> Using these directives makes your website "Interactive," which keeps users on the page longer—a signal Google loves!</p>
+        </div>
+        
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

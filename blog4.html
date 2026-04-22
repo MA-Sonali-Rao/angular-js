@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Learn about AngularJS directives like ng-app, ng-init, and ng-model in this beginner-friendly guide.">
+    <title>Blog 4: Introduction to Directives</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 4: Understanding Directives</h1>
+        <p>Directives are markers on a DOM element that tell AngularJS to attach a special behavior to that element.</p>
+        
+        <h3>Common Directives:</h3>
+        <ul>
+            <li><strong>ng-app:</strong> Initializes an AngularJS application.</li>
+            <li><strong>ng-init:</strong> Defines initial values for an application.</li>
+            <li><strong>ng-model:</strong> Binds the value of HTML controls (input, select, textarea) to application data.</li>
+        </ul>
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

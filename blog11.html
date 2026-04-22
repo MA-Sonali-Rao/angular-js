@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="A guide to creating interactive forms in AngularJS using input fields, checkboxes, and radio buttons.">
+    <title>Blog 11: AngularJS Forms</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        .form-example { border: 1px dashed #ccc; padding: 15px; margin-top: 10px; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 11: Creating Forms</h1>
+        <p>Forms are the most important part of many web apps. AngularJS provides <code>ng-model</code> to bind the state of the form to your data.</p>
+        
+        <div class="form-example">
+            <p><strong>Try it:</strong></p>
+            <input type="checkbox" ng-model="myVar"> Show Header
+            <h2 ng-show="myVar">Hello World!</h2>
+        </div>
+
+        <p>AngularJS keeps track of the state of the form, so you can easily tell if a user has typed into a box or left it empty.</p>
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

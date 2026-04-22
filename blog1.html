@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Blog 1: Introduction to AngularJS</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-bottom: 20px; }
+        .download-btn:hover { background: #218838; }
+        h1 { color: #dd0031; }
+        @media print { .download-btn, nav { display: none; } } /* This hides the button when saving as PDF */
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Click to Download as PDF</button>
+        
+        <h1>Blog 1: Introduction to AngularJS</h1>
+        <p><strong>What is AngularJS?</strong></p>
+        <p>AngularJS is a structural framework for dynamic web apps. It lets you use HTML as your template language and lets you extend HTML's syntax to express your application's components clearly and succinctly.</p>
+        
+        <h3>Key Features:</h3>
+        <ul>
+            <li><strong>Data Binding:</strong> Automatic synchronization of data between model and view components.</li>
+            <li><strong>Controller:</strong> These are JavaScript functions that are bound to a particular scope.</li>
+            <li><strong>Directives:</strong> Markers on a DOM element that tell AngularJS to attach a specified behavior.</li>
+        </ul>
+
+        <p><a href="index.html">← Back to Home</a></p>
+    </div>
+
+</body>
+</html>

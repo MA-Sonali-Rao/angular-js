@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="A step-by-step guide on how to display and sort data in HTML tables using the ng-repeat directive in AngularJS.">
+    <title>Blog 8: AngularJS Tables</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #dd0031; color: white; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 8: Displaying Data in Tables</h1>
+        <p>Displaying data in a table is a very common task. In AngularJS, we use the <code>ng-repeat</code> directive to loop through a list of data and create rows automatically.</p>
+        
+        <h3>Example Structure:</h3>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Country</th>
+            </tr>
+            <tr>
+                <td>Sonali</td>
+                <td>India</td>
+            </tr>
+            <tr>
+                <td>Alex</td>
+                <td>Georgia</td>
+            </tr>
+        </table>
+        <p>By using <code>orderBy</code>, you can even sort your tables alphabetically with just one line of code!</p>
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

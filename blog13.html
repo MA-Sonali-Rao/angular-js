@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Learn how to fetch data from a server or external API using the AngularJS $http service.">
+    <title>Blog 13: Working with APIs</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
+        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
+        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #dd0031; }
+        .info-box { background: #e7f3ff; border-left: 5px solid #2196f3; padding: 15px; }
+        @media print { .download-btn, .back-link { display: none; } }
+        @media print { 
+    .download-btn, .back-link, a { display: none !important; } 
+    body { background: white; padding: 0; }
+    .blog-box { border: none; box-shadow: none; width: 100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="blog-box">
+        <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <h1>Blog 13: Fetching Data with $http</h1>
+        <p>The <code>$http</code> service is a core AngularJS service that helps the application communicate with remote servers via the browser's XMLHttpRequest object.</p>
+        
+        <div class="info-box">
+            <p><strong>Common Methods:</strong></p>
+            <ul>
+                <li><strong>.get()</strong>: Used to retrieve data (like a list of products).</li>
+                <li><strong>.post()</strong>: Used to send data (like a new user registration).</li>
+            </ul>
+        </div>
+        <p>By using this service, your website can show real-time weather, news, or stock prices!</p>
+        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>
