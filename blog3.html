@@ -2,38 +2,146 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Put a short summary of this specific blog here.">
-    <title>Blog 3: The MVC Architecture</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03. The MVC Architecture | Learning Hub</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
-        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
-        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
-        h1 { color: #dd0031; }
-        .highlight { background: #fff3f3; padding: 15px; border-left: 5px solid #dd0031; margin: 20px 0; }
-        @media print { .download-btn, .back-link { display: none; } }
-        @media print { 
-    .download-btn, .back-link, a { display: none !important; } 
-    body { background: white; padding: 0; }
-    .blog-box { border: none; box-shadow: none; width: 100%; }
+        :root { --primary: #dd0031; --dark: #202124; --bg: #f8f9fa; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.8; color: #333; margin: 0; background: var(--bg); }
+        .container { max-width: 850px; margin: 40px auto; background: white; padding: 60px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        h1 { color: var(--primary); font-size: 2.8rem; margin-bottom: 20px; }
+        h2 { color: var(--dark); margin-top: 45px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        p { margin-bottom: 25px; font-size: 1.15rem; color: #444; }
+        
+        .mvc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 30px 0; }
+        .mvc-card { background: #fffafa; padding: 20px; border-radius: 15px; border: 1px solid #f0e0e0; text-align: center; }
+        .mvc-card b { color: var(--primary); display: block; font-size: 1.2rem; margin-bottom: 10px; }
+
+        .code-lab {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 30px 0;
+            border-left: 8px solid #007bff;
+        }
+        
+        .interaction-footer { margin-top: 80px; padding-top: 40px; border-top: 2px solid #f0f0f0; }
+        .comment-box { display: flex; gap: 15px; margin-top: 20px; }
+        .comment-box input { flex: 1; padding: 15px 25px; border-radius: 30px; border: 1px solid #ddd; outline: none; }
+        .comment-box button { background: var(--primary); color: white; border: none; padding: 0 35px; border-radius: 30px; cursor: pointer; font-weight: 600; }
+        .back-nav { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: bold; }
+   /* Styling for the button on screen */
+.download-btn { 
+    background: #28a745; 
+    color: white; 
+    padding: 12px 25px; 
+    border: none; 
+    border-radius: 30px; 
+    cursor: pointer; 
+    font-weight: 600;
+    margin-bottom: 25px; 
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
 }
+
+.download-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* Print Logic */
+@media print { 
+    /* Hide the button, the back link, and the comment section in the PDF */
+    .download-btn, .back-nav, .interaction-footer, button { 
+        display: none !important; 
+    } 
+    body { background: white; padding: 0; }
+    .container { 
+        border: none; 
+        box-shadow: none; 
+        width: 100%; 
+        max-width: 100%; 
+        padding: 0; 
+        margin: 0;
+    }
+    h1 { color: #000; }
+} 
     </style>
-    
 </head>
 <body>
-    <div class="blog-box">
-        <button class="download-btn" onclick="window.print()">Download Notes as PDF</button>
-        <h1>Blog 3: What is MVC?</h1>
-        <p>AngularJS is based on the <strong>MVC (Model-View-Controller)</strong> design pattern.</p>
+
+<div class="container">
+   <a href="index.html#blogs" class="back-nav">← Back to Curriculum</a>
+    <button class="download-btn" onclick="window.print()">
+        📥 Download Lesson as PDF
+    </button>
+    
+    <h1>The MVC Architecture</h1>
+
+    <section>
+        <h2>Why Everyone Talks About MVC in AngularJS</h2>
+        <p>When you first start building with AngularJS, everything feels simple… until your code slowly turns into a confusing mess. Variables here, functions there, HTML mixed with logic — and suddenly, debugging becomes a nightmare.</p>
+        <p>This is exactly the problem AngularJS solves using the <strong>MVC pattern</strong>. It stands for Model, View, Controller — and once you understand this, AngularJS starts making a lot more sense.</p>
+    </section>
+
+    <section>
+        <h2>Breaking Down MVC (In Simple Words)</h2>
+        <p>Instead of putting everything in one file, Angular divides your app into three distinct parts:</p>
         
-        <div class="highlight">
-            <p><strong>Model:</strong> This is the data. (e.g., A user's name).</p>
-            <p><strong>View:</strong> This is what the user sees. (The HTML page).</p>
-            <p><strong>Controller:</strong> This is the brain. It connects the data to the view.</p>
+        <div class="mvc-grid">
+            <div class="mvc-card"><b>Model</b>Holds your data</div>
+            <div class="mvc-card"><b>View</b>Displays your data</div>
+            <div class="mvc-card"><b>Controller</b>Manages the logic</div>
         </div>
 
-        <p>By separating these three, your code stays organized and professional—which is exactly what big companies look for!</p>
         
-        <p class="back-link"><a href="index.html">← Back to Table of Contents</a></p>
-    </div>
+        <p><strong>The Model: Where Your Data Lives</strong><br>
+        In AngularJS, the Model is mainly handled using the <code>$scope</code> object. Think of it as a storage box. When you say <code>$scope.name = "Sonali";</code>, Angular makes that data available everywhere.</p>
+        
+        <p><strong>The View: What the User Sees</strong><br>
+        The View is your HTML, but with superpowers. Instead of hardcoding text, you use <code>{{ name }}</code>. Angular then says: "Take the value from the Model and show it here."</p>
+
+        <p><strong>The Controller: The Brain Behind It</strong><br>
+        The Controller is the connector. It defines the data, stores it in the Model ($scope), and the View automatically displays it.</p>
+    </section>
+
+    <section>
+        <h2>Try It Yourself: The MVC Flow</h2>
+        <p>Observe how the Controller sets the data and the View simply "asks" for it. This separation keeps your project from turning into chaos.</p>
+
+        <div class="code-lab">
+            <h4 style="color: #007bff; margin-top: 0;">Code Playground</h4>
+            <pre><code>// 1. THE CONTROLLER (Logic)
+app.controller("myCtrl", function($scope) {
+    // 2. THE MODEL (Data)
+    $scope.name = "Sonali"; 
+});
+
+&lt;!-- 3. THE VIEW (Display) --&gt;
+&lt;div ng-controller="myCtrl"&gt;
+    &lt;h1&gt;Welcome, {{ name }}&lt;/h1&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+    </section>
+
+    <section>
+        <h2>A Simple Way to Remember</h2>
+        <p style="background: #eee; padding: 20px; border-radius: 10px;">
+            👉 <strong>Controller</strong> tells <strong>Model</strong> what to store<br>
+            👉 <strong>View</strong> shows what <strong>Model</strong> has
+            <img src="ping.png" style="width:100%; border-radius:15px; margin: 20px 0;">
+        </p>
+    </section>
+
+    <footer class="interaction-footer">
+        <p style="font-weight: 600; color: #555;">Let us know how did you like this explanation or how it could be improved?</p>
+        <div class="comment-box">
+            <input type="text" placeholder="Write a comment...">
+            <button onclick="alert('Comment posted for review!')">Post</button>
+        </div>
+    </footer>
+</div>
+
 </body>
 </html>

@@ -2,34 +2,149 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="A simple explanation of how Two-Way Data Binding works in AngularJS with practical examples.">
-    <title>Blog 5: Two-Way Data Binding</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05. Two-Way Data Binding | Learning Hub</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
-        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
-        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
-        h1 { color: #dd0031; }
-        .code-block { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 5px; font-family: monospace; }
-        @media print { .download-btn, .back-link { display: none; } }
-        @media print { 
-    .download-btn, .back-link, a { display: none !important; } 
-    body { background: white; padding: 0; }
-    .blog-box { border: none; box-shadow: none; width: 100%; }
+        :root { --primary: #dd0031; --dark: #202124; --bg: #f8f9fa; --success: #28a745; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.8; color: #333; margin: 0; background: var(--bg); }
+        .container { max-width: 850px; margin: 40px auto; background: white; padding: 60px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        
+        .back-nav { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: bold; }
+        h1 { color: var(--primary); font-size: 2.8rem; margin-bottom: 20px; }
+        h2 { color: var(--dark); margin-top: 45px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        p { margin-bottom: 25px; font-size: 1.15rem; color: #444; }
+
+        /* The Mirror Analogy Box */
+        .analogy-card { 
+            background: #fff5f5; 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 2px dashed var(--primary); 
+            margin: 30px 0;
+            text-align: center;
+        }
+        .analogy-card b { color: var(--primary); font-size: 1.3rem; }
+
+        /* Code Display */
+        .code-lab {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 25px;
+            border-radius: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 30px 0;
+            border-bottom: 4px solid var(--success);
+        }
+
+        .highlight-text { background: #fff0f0; color: var(--primary); padding: 2px 8px; border-radius: 5px; font-weight: 600; }
+
+        /* Footer */
+        .interaction-footer { margin-top: 80px; padding-top: 40px; border-top: 2px solid #f0f0f0; }
+        .comment-box { display: flex; gap: 15px; margin-top: 20px; }
+        .comment-box input { flex: 1; padding: 15px 25px; border-radius: 30px; border: 1px solid #ddd; outline: none; }
+        .comment-box button { background: var(--primary); color: white; border: none; padding: 0 35px; border-radius: 30px; cursor: pointer; font-weight: 600; }
+   /* Styling for the button on screen */
+.download-btn { 
+    background: #28a745; 
+    color: white; 
+    padding: 12px 25px; 
+    border: none; 
+    border-radius: 30px; 
+    cursor: pointer; 
+    font-weight: 600;
+    margin-bottom: 25px; 
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
 }
-    </style>
+
+.download-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* Print Logic */
+@media print { 
+    /* Hide the button, the back link, and the comment section in the PDF */
+    .download-btn, .back-nav, .interaction-footer, button { 
+        display: none !important; 
+    } 
+    body { background: white; padding: 0; }
+    .container { 
+        border: none; 
+        box-shadow: none; 
+        width: 100%; 
+        max-width: 100%; 
+        padding: 0; 
+        margin: 0;
+    }
+    h1 { color: #000; }
+}
+   </style>
 </head>
 <body>
-    <div class="blog-box">
-        <button class="download-btn" onclick="window.print()">Download as PDF</button>
-        <h1>Blog 5: Two-Way Data Binding</h1>
-        <p>This is the "magic" of Angular. When you change something in the Input box, it automatically updates the text on the screen without refreshing!</p>
+
+<div class="container">
+    <a href="index.html#blogs" class="back-nav">← Back to Curriculum</a>
+    <button class="download-btn" onclick="window.print()">
+        📥 Download Lesson as PDF
+    </button>
+    
+    <h1>Two-Way Data Binding</h1>
+
+    <section>
+        <h2>The Feature That Made AngularJS Famous</h2>
+        <p>Every framework has that one feature that makes people stop and go: 👉 <em>“Wait… how did that just happen?”</em> For AngularJS, that feature is <strong>Two-Way Data Binding</strong>.</p>
+        <p>Before Angular, updating the screen was a chore. You had to select elements and manually change content. It was repetitive and painful. Angular changed the game: What if your data and your UI stayed connected… <strong>automatically?</strong></p>
+    </section>
+
+    <div class="analogy-card">
+        <b>The Mirror Effect</b>
+        <p>Think of it like a mirror. When you move (Data), your reflection (UI) moves instantly. There is no delay, no "refresh," just a live sync.</p>
         
-        <div class="code-block">
-            &lt;input ng-model="name"&gt; <br>
-            &lt;h1&gt;Hello {{name}}&lt;/h1&gt;
-        </div>
-        <p>In this example, whatever the user types in the input is immediately shown in the H1 tag.</p>
-        <p class="back-link"><a href="index.html">← Back to Home</a></p>
     </div>
+
+    <section>
+        <h2>Think of It Like a Shared Google Doc</h2>
+        <p>Imagine editing a Google Doc with a friend. You type something, they see it. They edit, you see it. No “Save” button and no “Refresh” needed. In Angular:</p>
+        <ul>
+            <li><strong>Model (Data)</strong> = Person A typing</li>
+            <li><strong>View (UI)</strong> = Person B seeing it</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>The "Live Mirror" in Code</h2>
+        <p>Look at how little code it takes to create a live connection. By using <span class="highlight-text">ng-model</span>, we create a two-way street.</p>
+        
+        <div class="code-lab">
+            <pre><code>&lt;!-- The View --&gt;
+&lt;div ng-app=""&gt;
+    &lt;input type="text" ng-model="userName" placeholder="Type your name..."&gt;
+    
+    &lt;h2&gt;Hello {{ userName }}&lt;/h2&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <p>As you type in the input, the <code>{{ userName }}</code> expression updates instantly. This is why people call it <span class="highlight-text">“The death of the refresh button.”</span></p>
+    </section>
+
+    
+
+    <section>
+        <h2>Why This Saves Time</h2>
+        <p>Think about building a form. Without Angular, you’d write event listeners for every single keypress. With Angular, you just use <code>ng-model</code> and let the framework handle the syncing logic behind the scenes.</p>
+    </section>
+
+    <footer class="interaction-footer">
+        <p style="font-weight: 600; color: #555;">Did the "Mirror" analogy help you understand data binding? Leave a thought!</p>
+        <div class="comment-box">
+            <input type="text" placeholder="Write a comment...">
+            <button onclick="alert('Comment posted!')">Post</button>
+        </div>
+        <div style="margin-top: 20px; text-align: center;">
+            <button style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Download as PDF</button>
+        </div>
+    </footer>
+</div>
+
 </body>
 </html>

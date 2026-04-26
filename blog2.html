@@ -2,36 +2,170 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Put a short summary of this specific blog here.">
-    <title>Blog 2: Setting Up the AngularJS Environment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. Setting Up Your Environment | Learning Hub</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
-        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
-        h1 { color: #dd0031; border-bottom: 2px solid #dd0031; padding-bottom: 10px; }
-        code { background: #eee; padding: 2px 5px; border-radius: 3px; font-family: monospace; }
-        @media print { .download-btn, .back-link { display: none; } }
-        @media print { 
-    .download-btn, .back-link, a { display: none !important; } 
+        :root { --primary: #dd0031; --dark: #202124; --bg: #f8f9fa; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.8; color: #333; margin: 0; background: var(--bg); }
+        .container { max-width: 850px; margin: 40px auto; background: white; padding: 60px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        h1 { color: var(--primary); font-size: 2.8rem; margin-bottom: 20px; }
+        h2 { color: var(--dark); margin-top: 45px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        p { margin-bottom: 20px; font-size: 1.1rem; color: #444; }
+        
+        .setup-list { background: #fffafa; padding: 25px; border-radius: 15px; border: 1px solid #f0e0e0; margin-bottom: 30px; }
+        .setup-list b { color: var(--primary); }
+
+        .code-lab {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 30px 0;
+            overflow-x: auto;
+            border-left: 8px solid #4CAF50;
+        }
+        
+        .interaction-footer { margin-top: 80px; padding-top: 40px; border-top: 2px solid #f0f0f0; }
+        .comment-box { display: flex; gap: 15px; margin-top: 20px; }
+        .comment-box input { flex: 1; padding: 15px 25px; border-radius: 30px; border: 1px solid #ddd; outline: none; }
+        .comment-box button { background: var(--primary); color: white; border: none; padding: 0 35px; border-radius: 30px; cursor: pointer; font-weight: 600; }
+        .back-nav { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: bold; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; }
+        th, td { border: 1px solid #ddd; padding: 15px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        /* Styling for the button on screen */
+.download-btn { 
+    background: #28a745; 
+    color: white; 
+    padding: 12px 25px; 
+    border: none; 
+    border-radius: 30px; 
+    cursor: pointer; 
+    font-weight: 600;
+    margin-bottom: 25px; 
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.download-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* Print Logic */
+@media print { 
+    /* Hide the button, the back link, and the comment section in the PDF */
+    .download-btn, .back-nav, .interaction-footer, button { 
+        display: none !important; 
+    } 
     body { background: white; padding: 0; }
-    .blog-box { border: none; box-shadow: none; width: 100%; }
+    .container { 
+        border: none; 
+        box-shadow: none; 
+        width: 100%; 
+        max-width: 100%; 
+        padding: 0; 
+        margin: 0;
+    }
+    h1 { color: #000; }
 }
     </style>
 </head>
 <body>
-    <div class="blog-box">
-        <button class="download-btn" onclick="window.print()">Download Notes as PDF</button>
-        <h1>Blog 2: Setting Up the Environment</h1>
-        <p>To start building with AngularJS, you don't need a heavy installation. You just need to link the library.</p>
-        
-        <h3>Step 1: The Library Link</h3>
-        <p>You can include AngularJS in your HTML file using a Content Delivery Network (CDN) link:</p>
-        <code>&lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"&gt;&lt;/script&gt;</code>
 
-        <h3>Step 2: The ng-app Directive</h3>
-        <p>This is the most important step. You must tell HTML where the Angular application starts by using <code>ng-app</code>.</p>
+<div class="container">
+    <a href="index.html#blogs" class="back-nav">← Back to Curriculum</a>
+    
+    <button class="download-btn" onclick="window.print()">
+        📥 Download Lesson as PDF
+    </button>
+    
+    <h1>Setting Up Your Development Environment</h1>
+
+    <section>
+        <h2>Introduction: Why Setup Matters</h2>
+        <p>A proper development environment is the foundation of any successful project. It helps you:</p>
+        <ul style="font-size: 1.1rem;">
+            <li>Avoid common errors</li>
+            <li>Save debugging time</li>
+            <li>Write clean and structured code</li>
+        </ul>
+        <p>Without the right setup, even small mistakes can become difficult to fix. Investing time in your workspace now will save you hours later.</p>
+    </section>
+
+    <section>
+        <h2>Essential Tools You Need</h2>
+        <p>Before starting with AngularJS, make sure you have the following tools installed and ready:</p>
         
-        <p class="back-link"><a href="index.html">← Back to Table of Contents</a></p>
-    </div>
+        <div class="setup-list">
+            <p><b>1. VS Code (Code Editor):</b> A lightweight and powerful editor that supports extensions and makes managing code easy.</p>
+            <p><b>2. Node.js:</b> Allows you to run JavaScript outside the browser and helps manage project tools.</p>
+            <p><b>3. AngularJS:</b> The core framework, which can be included via a CDN link or a local file.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>CDN vs Local File</h2>
+        <table>
+            <tr>
+                <th>Method</th>
+                <th>Advantages</th>
+                <th>Disadvantages</th>
+            </tr>
+            <tr>
+                <td><b>CDN Link</b></td>
+                <td>Quick setup, no download, automatically cached.</td>
+                <td>Requires an active internet connection.</td>
+            </tr>
+            <tr>
+                <td><b>Local File</b></td>
+                <td>Works offline, more control over versions.</td>
+                <td>Manual download and setup required.</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Pre-Flight Checklist (Step-by-Step)</h2>
+        <p>Follow these steps to prepare your project structure:</p>
+        
+        
+
+        <p><b>Step 1 & 2:</b> Create a folder named <code>angular-project</code> and add these files: <code>index.html</code>, <code>app.js</code>, and <code>style.css</code>.</p>
+        
+        <p><b>Step 3 & 4:</b> Set up your logic. Your <code>index.html</code> should link to the library and your local script, while <code>app.js</code> initializes the module.</p>
+
+        <div class="code-lab">
+            <h4 style="color: #4CAF50; margin-top: 0;">Try It Yourself: Live Lab</h4>
+            <pre><code>// In your app.js
+var app = angular.module("myApp", []);
+
+&lt;!-- In your index.html --&gt;
+&lt;html ng-app="myApp"&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello AngularJS&lt;/h1&gt;
+    &lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"&gt;&lt;/script&gt;
+    &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+    </section>
+
+    <section>
+        <h2>Final Thoughts</h2>
+        <p>A clean setup ensures smooth development, fewer errors, and a better understanding of the AngularJS structure. Once your environment is ready, you can start building real applications with confidence!</p>
+    </section>
+
+    <footer class="interaction-footer">
+        <p style="font-weight: 600; color: #555;">Let us know how did you like this explanation or how it could be improved?</p>
+        <div class="comment-box">
+            <input type="text" placeholder="Write your thoughts or doubts here...">
+            <button onclick="alert('Thank you! Your feedback helps us improve.')">Post</button>
+        </div>
+    </footer>
+</div>
+
 </body>
 </html>

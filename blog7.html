@@ -2,36 +2,159 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Master AngularJS expressions and learn how to format data using built-in filters like uppercase and currency.">
-    <title>Blog 7: Expressions & Filters</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07. Controllers in Depth | Learning Hub</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
-        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
-        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
-        h1 { color: #dd0031; }
-        code { background: #f4f4f4; padding: 2px 5px; color: #d10028; }
-        @media print { .download-btn, .back-link { display: none; } }
-        @media print { 
-    .download-btn, .back-link, a { display: none !important; } 
+        :root { --primary: #dd0031; --dark: #202124; --bg: #f8f9fa; --accent: #f0f4f8; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.8; color: #333; margin: 0; background: var(--bg); }
+        .container { max-width: 850px; margin: 40px auto; background: white; padding: 60px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        
+        .back-nav { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .back-nav:hover { transform: translateX(-5px); }
+        
+        h1 { color: var(--primary); font-size: 2.8rem; margin-bottom: 20px; }
+        h2 { color: var(--dark); margin-top: 45px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        p { margin-bottom: 25px; font-size: 1.15rem; color: #444; }
+
+        /* The Kitchen Analogy Box */
+        .kitchen-box { 
+            background: var(--accent); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border-left: 8px solid #007bff; 
+            margin: 30px 0; 
+        }
+        .kitchen-box b { color: #007bff; font-size: 1.2rem; }
+        
+        /* Code Block */
+        .code-lab {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 30px 0;
+            border-bottom: 4px solid #61afef;
+            overflow-x: auto;
+        }
+
+        .btn-demo {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .interaction-footer { margin-top: 80px; padding-top: 40px; border-top: 2px solid #f0f0f0; }
+        .comment-box { display: flex; gap: 15px; margin-top: 20px; }
+        .comment-box input { flex: 1; padding: 15px 25px; border-radius: 30px; border: 1px solid #ddd; outline: none; }
+        .comment-box button { background: var(--primary); color: white; border: none; padding: 0 35px; border-radius: 30px; cursor: pointer; font-weight: 600; }
+    /* Styling for the button on screen */
+.download-btn { 
+    background: #28a745; 
+    color: white; 
+    padding: 12px 25px; 
+    border: none; 
+    border-radius: 30px; 
+    cursor: pointer; 
+    font-weight: 600;
+    margin-bottom: 25px; 
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.download-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* Print Logic */
+@media print { 
+    /* Hide the button, the back link, and the comment section in the PDF */
+    .download-btn, .back-nav, .interaction-footer, button { 
+        display: none !important; 
+    } 
     body { background: white; padding: 0; }
-    .blog-box { border: none; box-shadow: none; width: 100%; }
+    .container { 
+        border: none; 
+        box-shadow: none; 
+        width: 100%; 
+        max-width: 100%; 
+        padding: 0; 
+        margin: 0;
+    }
+    h1 { color: #000; }
 }
     </style>
 </head>
 <body>
-    <div class="blog-box">
-        <button class="download-btn" onclick="window.print()">Download as PDF</button>
-        <h1>Blog 7: Expressions & Filters</h1>
-        <p>Expressions are used to bind application data to HTML. They are written inside double braces: <code>{{ expression }}</code>.</p>
-        
-        <h3>What are Filters?</h3>
-        <p>Filters can be added to expressions to transform the data. For example:</p>
+
+<div class="container">
+    <a href="index.html#blogs" class="back-nav">← Back to Curriculum</a>
+    <button class="download-btn" onclick="window.print()">
+        📥 Download Lesson as PDF
+    </button>
+    
+    <h1>Controllers: The Brain of Your App</h1>
+
+    <section>
+        <h2>So Far… Everything Feels Automatic</h2>
+        <p>By now, you’ve seen AngularJS do some pretty cool things: Data appears instantly, inputs update automatically, and there is no refresh needed. It almost feels like things are happening on their own. But behind all of this, there is always something in control. 👉 <strong>That “something” is the Controller.</strong></p>
+    </section>
+
+    <div class="kitchen-box">
+        <b>The Chef in the Kitchen 👨‍🍳</b>
+        <p>Think of your app like a restaurant:</p>
         <ul>
-            <li><code>{{ name | uppercase }}</code> - Changes text to all caps.</li>
-            <li><code>{{ price | currency }}</code> - Formats a number as money.</li>
-            <li><code>{{ date | date:'fullDate' }}</code> - Formats a date nicely.</li>
+            <li><strong>The View (HTML)</strong> is the Menu. It shows what is available.</li>
+            <li><strong>The $scope</strong> is the Waiter. He carries orders back and forth.</li>
+            <li><strong>The Controller</strong> is the Chef. He decides how the food is prepared and manages the ingredients (Data).</li>
         </ul>
-        <p class="back-link"><a href="index.html">← Back to Home</a></p>
     </div>
+
+    <section>
+        <h2>Controllers Handle Actions</h2>
+        <p>Controllers aren't just for storing names; they handle what happens when a user clicks, types, or submits. They are the decision-makers. Look at this simple counter logic:</p>
+        
+        <div class="code-lab">
+            <pre><code>// THE BRAIN (Logic)
+app.controller("myCtrl", function($scope) {
+    $scope.count = 0;
+
+    $scope.increment = function() {
+        $scope.count++; // Logic: Add 1 every time
+    };
+});
+
+&lt;!-- THE FACE (UI) --&gt;
+&lt;div ng-controller="myCtrl"&gt;
+    &lt;p&gt;Current Count: {{ count }}&lt;/p&gt;
+    &lt;button ng-click="increment()"&gt;Click Me&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+    </section>
+
+    
+
+    <section>
+        <h2>Why Separation Matters</h2>
+        <p>One of the biggest advantages of Controllers is that they keep <strong>JavaScript logic away from HTML design.</strong> This means your code stays organized. Designers can focus on making the UI look beautiful in the HTML, while developers focus on the "brains" in the Controller.</p>
+        <p style="background: #fff0f0; padding: 15px; border-radius: 10px; color: #dd0031; font-weight: 600;">
+            ⚠️ Pro-Tip: Avoid putting too much logic in your HTML attributes. Keep your real "thinking" inside the Controller!
+        </p>
+    </section>
+
+    <footer class="interaction-footer">
+        <p style="font-weight: 600; color: #555;">Ready to start building smarter apps? Let us know your thoughts!</p>
+        <div class="comment-box">
+            <input type="text" placeholder="Write a comment...">
+            <button onclick="alert('Comment shared!')">Post</button>
+        </div>
+    </footer>
+</div>
+
 </body>
 </html>

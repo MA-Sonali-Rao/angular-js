@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ma-sonali-rao.github.io/angular-js/sitemap.xml

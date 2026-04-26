@@ -2,40 +2,200 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <title>Blog 1: Introduction to AngularJS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. The Dawn of AngularJS | Learning Hub</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
-        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
-        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-bottom: 20px; }
-        .download-btn:hover { background: #218838; }
-        h1 { color: #dd0031; }
-        @media print { .download-btn, nav { display: none; } } /* This hides the button when saving as PDF */
-        @media print { 
-    .download-btn, .back-link, a { display: none !important; } 
+        :root { --primary: #dd0031; --dark: #202124; --bg: #f8f9fa; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            line-height: 1.8; 
+            color: #333; 
+            margin: 0; 
+            background: var(--bg); 
+        }
+        .container { 
+            max-width: 850px; 
+            margin: 40px auto; 
+            background: white; 
+            padding: 60px; 
+            border-radius: 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
+        }
+        h1 { color: var(--primary); font-size: 2.8rem; margin-bottom: 20px; }
+        h2 { color: var(--dark); margin-top: 45px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        p { margin-bottom: 25px; font-size: 1.15rem; color: #444; }
+        ul { margin-bottom: 25px; }
+        li { margin-bottom: 10px; font-size: 1.1rem; }
+        
+        .visual-box {
+            background: #fffafa;
+            border: 2px dashed #ecc;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+
+        /* Wattpad Style Interaction Footer */
+        .interaction-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid #f0f0f0;
+        }
+        .comment-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .comment-box {
+            display: flex;
+            gap: 15px;
+            background: #fff;
+        }
+        .comment-box input {
+            flex: 1;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            outline: none;
+            transition: 0.3s;
+        }
+        .comment-box input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(221,0,49,0.1); }
+        .comment-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .comment-box button:hover { background: var(--secondary); transform: scale(1.05); }
+        
+        .back-nav { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: bold; }
+    /* Styling for the button on screen */
+.download-btn { 
+    background: #28a745; 
+    color: white; 
+    padding: 12px 25px; 
+    border: none; 
+    border-radius: 30px; 
+    cursor: pointer; 
+    font-weight: 600;
+    margin-bottom: 25px; 
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.download-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* Print Logic */
+@media print { 
+    /* Hide the button, the back link, and the comment section in the PDF */
+    .download-btn, .back-nav, .interaction-footer, button { 
+        display: none !important; 
+    } 
     body { background: white; padding: 0; }
-    .blog-box { border: none; box-shadow: none; width: 100%; }
+    .container { 
+        border: none; 
+        box-shadow: none; 
+        width: 100%; 
+        max-width: 100%; 
+        padding: 0; 
+        margin: 0;
+    }
+    h1 { color: #000; }
 }
     </style>
 </head>
 <body>
 
-    <div class="blog-box">
-        <button class="download-btn" onclick="window.print()">Click to Download as PDF</button>
-        
-        <h1>Blog 1: Introduction to AngularJS</h1>
-        <p><strong>What is AngularJS?</strong></p>
-        <p>AngularJS is a structural framework for dynamic web apps. It lets you use HTML as your template language and lets you extend HTML's syntax to express your application's components clearly and succinctly.</p>
-        
-        <h3>Key Features:</h3>
-        <ul>
-            <li><strong>Data Binding:</strong> Automatic synchronization of data between model and view components.</li>
-            <li><strong>Controller:</strong> These are JavaScript functions that are bound to a particular scope.</li>
-            <li><strong>Directives:</strong> Markers on a DOM element that tell AngularJS to attach a specified behavior.</li>
-        </ul>
+<div class="container">
+    <a href="index.html#blogs" class="back-nav">← Back to Curriculum</a>
+    <body>
 
-        <p><a href="index.html">← Back to Home</a></p>
-    </div>
+
+    <button class="download-btn" onclick="window.print()">
+        📥 Download Lesson as PDF
+    </button>
+    
+    
+    
+    
+    
+    <h1>The Dawn of AngularJS</h1>
+    
+    <section>
+        <h2>Introduction: From Static to Dynamic Web Apps</h2>
+        <p>In the early days of the web, websites were <strong>static</strong>. This means every page was fixed — users could only read content without interacting much. Each time you clicked a link, the browser would reload an entirely new page.</p>
+        <p>As user expectations grew, developers started building <strong>dynamic web applications</strong>. These applications could update content instantly without reloading the whole page. Examples include dashboards, social media feeds, and online shopping carts.</p>
+        <p>This shift created the need for frameworks like AngularJS, which made building dynamic applications easier and more organized.</p>
+    </section>
+
+    <section>
+        <h2>What is a Single Page Application (SPA)?</h2>
+        <p>A Single Page Application (SPA) is a type of web application that loads only one HTML page and dynamically updates content as the user interacts with it.</p>
+        
+        <div class="visual-box">
+    <h4 style="margin-top:0;">Single Page Application vs Traditional Website</h4>
+    <img src="prop.png" style="width:100%; border-radius:15px; margin: 20px 0;">
+    <p style="font-size:0.9rem; color:#888; margin-top:10px;">(Left: Multi-page reload | Right: Angular dynamic data swap)</p>
+</div>
+
+        <p><strong>Key Features of SPAs:</strong></p>
+        <ul>
+            <li>No full page reloads</li>
+            <li>Faster user experience</li>
+            <li>Smooth navigation</li>
+            <li>Data updates dynamically</li>
+        </ul>
+        <p><em>Example:</em> Instead of loading a new page when clicking "About", the content changes instantly within the same page shell.</p>
+    </section>
+
+    <section>
+        <h2>How AngularJS Handles Routing</h2>
+        <p>Routing is the process of navigating between different views in an application. In traditional websites, clicking a link causes a flicker because the whole HTML page is reloading. In AngularJS, clicking a link updates only a section of the page, resulting in no reload and a seamless transition.</p>
+        
+        <p><strong>Why No Flicker?</strong><br>
+        AngularJS updates only the required part of the page using JavaScript, instead of reloading everything.</p>
+        
+        <p><strong>Benefits:</strong></p>
+        <ul>
+            <li>Faster performance</li>
+            <li>Better user experience</li>
+            <li>Seamless transitions</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>MVC Architecture in AngularJS</h2>
+        <p>As applications grow, code can become messy. AngularJS solves this using the <strong>MVC (Model-View-Controller)</strong> pattern.</p>
+
+        
+
+[Image of Model View Controller architecture diagram]
+
+
+        <p><strong>1. Model:</strong> Manages the data (e.g., User details).<br>
+        <strong>2. View:</strong> What the user sees (e.g., HTML page).<br>
+        <strong>3. Controller:</strong> Connects Model and View; handles logic.</p>
+        
+        <p><strong>Why MVC?</strong> It keeps code organized, easier to maintain, and prevents the dreaded “spaghetti code” where logic and design are tangled together.</p>
+    </section>
+
+    <footer class="interaction-footer">
+        <p class="comment-prompt">Let us know how did you like this explanation or how it could be improved?</p>
+        <div class="comment-box">
+            <input type="text" placeholder="Write your thoughts or doubts here...">
+            <button onclick="alert('Thank you! Your feedback helps us improve.')">Post</button>
+        </div>
+    </footer>
+</div>
 
 </body>
 </html>

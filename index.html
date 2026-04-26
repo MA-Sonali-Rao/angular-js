@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="AngularJS Masterclass - Complete 20-Day Course Content">
     <title>AngularJS Learning Hub | Pro Edition</title>
-    <meta name="google-site-verification" content="p2sj1Czd1hedeWK3aWqvqUThYs4imQaTkvj5N1AfGq0" />
+    
     <style>
         :root { 
             --primary: #dd0031; 
             --secondary: #b50028;
+            --success: #28a745;
             --dark: #202124; 
             --bg: #f8f9fa; 
-            --glass: rgba(255, 255, 255, 0.9);
+            --glass: rgba(255, 255, 255, 0.95);
         }
 
         body { 
@@ -21,9 +22,9 @@
             background: url('https://www.transparenttextures.com/patterns/cubes.png'), var(--bg); 
             color: #333; 
             scroll-behavior: smooth;
+            line-height: 1.8;
         }
         
-        /* Modern Navbar */
         nav { 
             background: var(--glass);
             backdrop-filter: blur(10px);
@@ -38,8 +39,8 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             border-bottom: 3px solid var(--primary);
         }
-        nav .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
-        nav ul { list-style: none; display: flex; margin: 0; }
+        nav .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; cursor: pointer; }
+        nav ul { list-style: none; display: flex; margin: 0; align-items: center; }
         nav ul li { margin-left: 30px; }
         nav ul li a { 
             color: var(--dark); 
@@ -48,171 +49,165 @@
             text-transform: uppercase;
             font-size: 0.9rem;
             transition: 0.3s;
+            cursor: pointer;
+            position: relative;
         }
-        nav ul li a:hover { color: var(--primary); }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 2px;
+            bottom: -5px; left: 0;
+            background-color: var(--primary);
+            transition: 0.3s;
+        }
+        nav ul li a:hover::after { width: 100%; }
 
-        /* Hero Section Styling */
+        /* User Welcome Styling */
+        #userWelcome { color: var(--primary); font-weight: 700; border: 1px solid var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; display: none; }
+
         .hero {
             background: linear-gradient(135deg, #dd0031 0%, #7b001a 100%);
             color: white;
-            padding: 120px 10% 60px;
+            padding: 160px 10% 100px;
             text-align: center;
-            border-radius: 0 0 50% 50% / 20px;
+            border-radius: 0 0 50% 50% / 40px;
+            box-shadow: 0 10px 30px rgba(221, 0, 49, 0.2);
         }
-        .hero h1 { font-size: 3rem; margin-bottom: 10px; color: white; }
-        .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto 30px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 15px; text-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .hero p { font-size: 1.25rem; opacity: 0.95; max-width: 850px; margin: 0 auto 40px; font-weight: 300; }
 
-        /* Section Handling */
-        section { display: none; padding: 40px 10%; min-height: 80vh; }
-        .active { display: block; animation: fadeIn 0.5s ease; } 
+        section { display: none; padding: 80px 10%; min-height: 80vh; }
+        .active { display: block; animation: fadeInUp 0.7s ease; } 
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Content Boxes */
         .content-box { 
             background: white; 
-            padding: 40px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            border: 1px solid #eee;
+            padding: 50px; 
+            border-radius: 30px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05); 
+            border: 1px solid #f0f0f0;
+            margin-bottom: 40px;
+            transition: 0.4s;
         }
         
-        /* Grid for Blogs */
-        #searchInput { 
-            padding: 15px 25px; 
-            width: 100%; 
-            max-width: 500px; 
-            border: none; 
-            border-radius: 50px; 
-            margin: 0 auto 40px; 
-            display: block;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            outline: none;
-            font-size: 1rem;
-        }
+        h2 { font-size: 2.2rem; color: var(--dark); margin-bottom: 25px; display: inline-block; transition: 0.3s; }
+        h2:hover { color: var(--primary); transform: scale(1.02) translateX(10px); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li { padding: 15px 0; border-bottom: 1px solid #eee; display: flex; align-items: center; transition: 0.3s; }
+        .feature-list li:hover { padding-left: 15px; color: var(--primary); background: #fffafa; }
+
+        #searchInput { padding: 20px 35px; width: 100%; max-width: 650px; border: 2px solid #eee; border-radius: 60px; margin: 0 auto 60px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.05); outline: none; font-size: 1.1rem; transition: 0.3s; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; }
         
         .card { 
-            position: relative;
             background: white; 
-            padding: 30px; 
-            border-radius: 15px; 
+            padding: 40px; 
+            border-radius: 25px; 
             text-decoration: none; 
             color: #333; 
-            transition: all 0.3s ease; 
-            border-left: 5px solid var(--primary);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            border-top: 6px solid var(--primary);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
         }
-        .card:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 15px 30px rgba(221, 0, 49, 0.1);
-            background: #fff8f8;
-        }
-        .card h3 { margin: 0; color: var(--primary); font-size: 1.2rem; margin-bottom: 8px; }
-        .card p { font-size: 0.9rem; color: #666; margin: 0; }
+        .card:hover { transform: translateY(-15px) scale(1.03); box-shadow: 0 25px 50px rgba(221, 0, 49, 0.15); background: #fffafa; }
 
-        .btn {
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            padding: 12px 30px; 
-            border-radius: 50px; 
-            font-weight: bold;
-            cursor: pointer; 
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(221, 0, 49, 0.3);
-        }
-        .btn:hover { background: var(--secondary); transform: scale(1.05); }
+        .btn { background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 60px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 25px rgba(221, 0, 49, 0.3); text-decoration: none; display: inline-block; }
 
-        footer { text-align: center; padding: 60px; color: #888; font-size: 0.85rem; }
+        footer { text-align: center; padding: 100px 10%; background: #fff; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo">ANGULAR.JS PRO</div>
+    <div class="logo" onclick="showSection('home')">ANGULAR.JS PRO</div>
     <ul>
         <li><a onclick="showSection('home')">Home</a></li>
-        <li><a onclick="showSection('about')">About</a></li>
-        <li><a onclick="showSection('blogs')">Blogs</a></li>
+        <li><a onclick="showSection('about')">The Science</a></li>
+        <li><a onclick="showSection('blogs')">Curriculum</a></li>
+        <li id="regLink"><a href="register.html">Register</a></li>
+        <li id="userWelcome"></li>
     </ul>
 </nav>
 
 <div class="hero">
-    <h1>Master AngularJS</h1>
-    <p>A structured 20-day journey from absolute zero to framework hero. Interactive notes, clear explanations, and SEO-ready content.</p>
-    <button class="btn" onclick="showSection('blogs')">View Curriculum</button>
+    <h1>Mastering the AngularJS Ecosystem</h1>
+    <p>Step into the world of professional frontend engineering. A comprehensive 20-day roadmap designed to transform beginners into architectural experts.</p>
+    <button class="btn" onclick="showSection('blogs')">Start the Journey</button>
 </div>
 
 <section id="home" class="active">
     <div class="content-box">
-        <h2>Why learn AngularJS?</h2>
-        <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 300px;">
-                <p>AngularJS revolutionized web development by introducing concepts that are still used today in modern frameworks. This course covers everything you need to score high in your project.</p>
-                <ul>
-                    <li><strong>Industry Standards:</strong> Learn MVC patterns used by top companies.</li>
-                    <li><strong>Interactive Learning:</strong> 20 pages of clean, downloadable notes.</li>
-                    <li><strong>SEO Optimized:</strong> Every page is built with search engines in mind.</li>
-                </ul>
-            </div>
-            <img src="Angular.jpg" alt="Angular Logo" style="width: 150px; opacity: 0.8;">
-        </div>
+        <h2>Why Study AngularJS Architecture?</h2>
+        <p>AngularJS introduced declarative programming to the web. It allows developers to define the *what* while the framework handles the *how*. This course explores these foundational principles.</p>
+        <ul class="feature-list">
+            <li><strong>Architectural Mastery:</strong> The MVC pattern explained.</li>
+            <li><strong>Dynamic UIs:</strong> Data-driven interface updates.</li>
+            <li><strong>Enterprise Readiness:</strong> Scalable services and dependency injection.</li>
+        </ul>
     </div>
 </section>
 
 <section id="about">
     <div class="content-box">
-        <h2>Project Documentation</h2>
-        <p>This educational portal was created to bridge the gap between complex documentation and student-friendly notes.</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
-            <div style="background: #fdfdfd; padding: 20px; border-radius: 10px; border: 1px solid #eee;">
-                <h4>🎯 Objective</h4>
-                <p>To provide a structured 20-part blog series that simplifies AngularJS concepts for college submissions.</p>
+        <h2>The Technical Blueprint</h2>
+        <p>This project functions as a Single Page Application (SPA), utilizing modern layouts and clean routing logic for an optimal user experience.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 40px 0;">
+            <div style="background: #fafafa; padding: 30px; border-radius: 20px;">
+                <h4 style="color: var(--primary);">MVC Model</h4>
+                <p>Focusing on the Model-View-ViewModel approach where $scope acts as the bridge.</p>
             </div>
-            <div style="background: #fdfdfd; padding: 20px; border-radius: 10px; border: 1px solid #eee;">
-                <h4>🛠️ Technology</h4>
-                <p>Built with HTML5, CSS3, and JavaScript logic. Designed for high SEO performance.</p>
+            <div style="background: #fafafa; padding: 30px; border-radius: 20px;">
+                <h4 style="color: var(--primary);">Clean SEO</h4>
+                <p>Audited via Lighthouse to ensure maximum visibility and performance.</p>
             </div>
         </div>
-        
     </div>
 </section>
 
 <section id="blogs">
-    <h2 style="text-align: center; margin-bottom: 30px;">Course Curriculum</h2>
-    <input type="text" id="searchInput" onkeyup="searchBlogs()" placeholder="🔍 Search for a topic (e.g. 'Routes')...">
+    <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="margin-bottom: 10px;">20 Days to Mastery</h2>
+        <p>Manage your progress and track your journey.</p>
+        <a href="curriculum.html" class="btn" style="padding: 12px 30px; font-size: 0.9rem;">Open Progress Tracker</a>
+    </div>
+
+    <input type="text" id="searchInput" onkeyup="searchBlogs()" placeholder="🔍 Search curriculum topics...">
     
     <div class="grid" id="blogGrid">
-        <a href="blog1.html" class="card"><h3>01. Introduction</h3><p>Start with the core basics of the framework.</p></a>
-        <a href="blog2.html" class="card"><h3>02. Setup Guide</h3><p>Environment and tools installation.</p></a>
-        <a href="blog3.html" class="card"><h3>03. MVC Logic</h3><p>Model, View, and Controller explained.</p></a>
-        <a href="blog4.html" class="card"><h3>04. Directives</h3><p>Extending HTML with new attributes.</p></a>
-        <a href="blog5.html" class="card"><h3>05. Data Binding</h3><p>Mastering two-way data synchronization.</p></a>
-        <a href="blog6.html" class="card"><h3>06. Controllers</h3><p>Connecting data to your visual view.</p></a>
-        <a href="blog7.html" class="card"><h3>07. Expressions</h3><p>Dynamic data output in HTML.</p></a>
-        <a href="blog8.html" class="card"><h3>08. Tables</h3><p>Generating data-driven lists and tables.</p></a>
-        <a href="blog9.html" class="card"><h3>09. DOM Control</h3><p>Managing UI states like show/hide.</p></a>
-        <a href="blog10.html" class="card"><h3>10. Events</h3><p>Listening to clicks and keyboard input.</p></a>
-        <a href="blog11.html" class="card"><h3>11. Forms</h3><p>Building professional user inputs.</p></a>
-        <a href="blog12.html" class="card"><h3>12. Validation</h3><p>Adding error checks to your forms.</p></a>
-        <a href="blog13.html" class="card"><h3>13. API & $http</h3><p>Fetching data from external servers.</p></a>
-        <a href="blog14.html" class="card"><h3>14. Services</h3><p>Creating reusable logic components.</p></a>
-        <a href="blog15.html" class="card"><h3>15. Routing</h3><p>Building a Single Page Application.</p></a>
-        <a href="blog16.html" class="card"><h3>16. Custom Tags</h3><p>Making your own HTML directives.</p></a>
-        <a href="blog17.html" class="card"><h3>17. Animations</h3><p>Making your UI feel smooth and alive.</p></a>
-        <a href="blog18.html" class="card"><h3>18. Injection</h3><p>Advanced Dependency Injection concepts.</p></a>
-        <a href="blog19.html" class="card"><h3>19. SEO Guide</h3><p>How to make Angular sites rank on Google.</p></a>
-        <a href="blog20.html" class="card"><h3>20. Deployment</h3><p>Final steps to host your site live.</p></a>
+        <a href="blog1.html" class="card" id="card-day01"><h3>01. Introduction</h3><p>Why Angular changed the web.</p></a>
+        <a href="blog2.html" class="card" id="card-day02"><h3>02. Environment</h3><p>Dev-ready workspace setup.</p></a>
+        <a href="blog3.html" class="card" id="card-day03"><h3>03. MVC Architecture</h3><p>The heart of the application.</p></a>
+        <a href="blog4.html" class="card" id="card-day04"><h3>04. Directives</h3><p>Extending HTML power.</p></a>
+        <a href="blog5.html" class="card" id="card-day05"><h3>05. Data Binding</h3><p>Two-way synchronization magic.</p></a>
+        <a href="blog6.html" class="card" id="card-day06"><h3>06. Expressions</h3><p>Logic directly in your views.</p></a>
+        <a href="blog7.html" class="card" id="card-day07"><h3>07. Controllers</h3><p>Managing your app state.</p></a>
+        <a href="blog8.html" class="card" id="card-day08"><h3>08. Filters</h3><p>Formatting data for users.</p></a>
+        <a href="blog9.html" class="card" id="card-day09"><h3>09. Global API</h3><p>Built-in utility functions.</p></a>
+        <a href="blog10.html" class="card" id="card-day10"><h3>10. Modules</h3><p>Organizing code structure.</p></a>
+        <a href="blog11.html" class="card" id="card-day11"><h3>11. Form Control</h3><p>Handling user input.</p></a>
+        <a href="blog12.html" class="card" id="card-day12"><h3>12. Validation</h3><p>Real-time data checking.</p></a>
+        <a href="blog13.html" class="card" id="card-day13"><h3>13. API Services</h3><p>Connecting to servers.</p></a>
+        <a href="blog14.html" class="card" id="card-day14"><h3>14. Factories</h3><p>Reusable business logic.</p></a>
+        <a href="blog15.html" class="card" id="card-day15"><h3>15. SPA Routing</h3><p>Smooth page transitions.</p></a>
+        <a href="blog16.html" class="card" id="card-day16"><h3>16. Custom Tags</h3><p>Creating custom elements.</p></a>
+        <a href="blog17.html" class="card" id="card-day17"><h3>17. ngAnimate</h3><p>UI transitions and motion.</p></a>
+        <a href="blog18.html" class="card" id="card-day18"><h3>18. Dependency Injection</h3><p>Clean component communication.</p></a>
+        <a href="blog19.html" class="card" id="card-day19"><h3>19. SEO Strategy</h3><p>Search engine optimization.</p></a>
+        <a href="blog20.html" class="card" id="card-day20"><h3>20. Deployment</h3><p>Going live on GitHub.</p></a>
     </div>
 </section>
 
 <footer>
-    <p>&copy; 2026 AngularJS Learning Hub | Built for Excellence</p>
+    <div style="max-width: 900px; margin: 0 auto;">
+        <h3>The AngularJS Learning Hub</h3>
+        <p>&copy; 2026 | Web Engineering Excellence Project</p>
+    </div>
 </footer>
 
 <script>
@@ -221,11 +216,9 @@
         sections.forEach(s => s.classList.remove('active'));
         document.getElementById(sectionId).classList.add('active');
         
-        // Hide hero on other sections, show only on Home
         let hero = document.querySelector('.hero');
         hero.style.display = (sectionId === 'home') ? 'block' : 'none';
-
-        window.scrollTo(0,0);
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
     function searchBlogs() {
@@ -236,6 +229,39 @@
             cards[i].style.display = title.includes(input) ? "block" : "none";
         }
     }
+
+    function updateCardBorders() {
+        let savedProgress = JSON.parse(localStorage.getItem('angularMasterclassProgress')) || {};
+        for (let i = 1; i <= 20; i++) {
+            let dayKey = 'day' + i.toString().padStart(2, '0');
+            let cardId = 'card-' + dayKey;
+            let cardElement = document.getElementById(cardId);
+            if (cardElement) {
+                cardElement.style.borderTopColor = (savedProgress[dayKey] === 'Completed') ? '#28a745' : '#dd0031';
+            }
+        }
+    }
+
+    // Checking for registered user
+    function checkUser() {
+        let name = localStorage.getItem('studentName');
+        if (name) {
+            document.getElementById('regLink').style.display = 'none';
+            let welcome = document.getElementById('userWelcome');
+            welcome.style.display = 'block';
+            welcome.innerText = "Hi, " + name + "!";
+        }
+    }
+
+    window.onload = function() {
+        updateCardBorders();
+        checkUser();
+        // Handle Back-from-Tracker hash
+        if (window.location.hash === '#blogs') {
+            showSection('blogs');
+        }
+    };
+    
 </script>
 
 </body>

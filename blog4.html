@@ -2,34 +2,157 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Learn about AngularJS directives like ng-app, ng-init, and ng-model in this beginner-friendly guide.">
-    <title>Blog 4: Introduction to Directives</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04. Powering HTML with Directives | Learning Hub</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
-        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
-        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
-        h1 { color: #dd0031; }
-        @media print { .download-btn, .back-link { display: none; } }
-        @media print { 
-    .download-btn, .back-link, a { display: none !important; } 
-    body { background: white; padding: 0; }
-    .blog-box { border: none; box-shadow: none; width: 100%; }
+        :root { --primary: #dd0031; --dark: #202124; --bg: #f8f9fa; --code-bg: #282c34; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.8; color: #333; margin: 0; background: var(--bg); }
+        .container { max-width: 850px; margin: 40px auto; background: white; padding: 60px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        
+        /* Navigation */
+        .back-nav { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .back-nav:hover { transform: translateX(-5px); }
+        
+        h1 { color: var(--primary); font-size: 2.8rem; margin-bottom: 20px; }
+        h2 { color: var(--dark); margin-top: 45px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        p { margin-bottom: 25px; font-size: 1.15rem; color: #444; }
+
+        /* Directive Highlight Cards */
+        .directive-card { 
+            background: #fffafa; 
+            padding: 25px; 
+            border-radius: 15px; 
+            border-left: 5px solid var(--primary); 
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .directive-card code { background: #fee2e2; color: var(--primary); padding: 2px 8px; border-radius: 5px; font-weight: bold; }
+
+        /* Code Block Lab */
+        .code-lab {
+            background: var(--code-bg);
+            color: #abb2bf;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 30px 0;
+            border-bottom: 4px solid var(--primary);
+            overflow-x: auto;
+        }
+        .lab-header { color: #61afef; font-weight: bold; margin-bottom: 10px; display: block; border-bottom: 1px solid #3e4451; padding-bottom: 5px; }
+
+        /* Footer Interaction */
+        .interaction-footer { margin-top: 80px; padding-top: 40px; border-top: 2px solid #f0f0f0; }
+        .comment-box { display: flex; gap: 15px; margin-top: 20px; }
+        .comment-box input { flex: 1; padding: 15px 25px; border-radius: 30px; border: 1px solid #ddd; outline: none; }
+        .comment-box button { background: var(--primary); color: white; border: none; padding: 0 35px; border-radius: 30px; cursor: pointer; font-weight: 600; }
+   /* Styling for the button on screen */
+.download-btn { 
+    background: #28a745; 
+    color: white; 
+    padding: 12px 25px; 
+    border: none; 
+    border-radius: 30px; 
+    cursor: pointer; 
+    font-weight: 600;
+    margin-bottom: 25px; 
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
 }
-    </style>
+
+.download-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* Print Logic */
+@media print { 
+    /* Hide the button, the back link, and the comment section in the PDF */
+    .download-btn, .back-nav, .interaction-footer, button { 
+        display: none !important; 
+    } 
+    body { background: white; padding: 0; }
+    .container { 
+        border: none; 
+        box-shadow: none; 
+        width: 100%; 
+        max-width: 100%; 
+        padding: 0; 
+        margin: 0;
+    }
+    h1 { color: #000; }
+}
+   </style>
 </head>
 <body>
-    <div class="blog-box">
-        <button class="download-btn" onclick="window.print()">Download as PDF</button>
-        <h1>Blog 4: Understanding Directives</h1>
-        <p>Directives are markers on a DOM element that tell AngularJS to attach a special behavior to that element.</p>
+
+<div class="container">
+    <a href="index.html#blogs" class="back-nav">← Back to Curriculum</a>
+    <button class="download-btn" onclick="window.print()">
+        📥 Download Lesson as PDF
+    </button>
+    
+    <h1>Powering HTML with Directives</h1>
+
+    <section>
+        <h2>What If HTML Could Do More?</h2>
+        <p>Normally, HTML is pretty simple. You write tags, display content… and that’s it. It doesn’t “think,” it doesn’t react — it just shows what you tell it. But AngularJS changes that by giving HTML superpowers using <strong>Directives</strong>.</p>
+        <p>Directives are special markers placed inside HTML that tell AngularJS to attach a specific behavior to that element. They look like normal attributes, but they carry a world of logic behind them.</p>
+    </section>
+
+    <section>
+        <h2>The Core Directives</h2>
+
+        <div class="directive-card">
+            <code>ng-app</code>: <strong>The Engine</strong>
+            <p>Every app needs a starting point. This tells Angular: "Everything inside this tag belongs to my app." Without it, the engine won't turn on.</p>
+        </div>
+
+        <div class="directive-card">
+            <code>ng-model</code>: <strong>The Real Magic</strong>
+            <p>This creates a live connection between your input box and your data. It enables <strong>Two-Way Data Binding</strong>: Input updates data → Data updates UI instantly.</p>
+        </div>
+
+        <div class="directive-card">
+            <code>ng-bind</code>: <strong>Professional Display</strong>
+            <p>A cleaner way to show data. It works like <code>{{ }}</code> but prevents that quick "flash" of raw code before the page fully loads.</p>
+        </div>
+    </section>
+
+    
+
+    <section>
+        <h2>Try It Yourself: The Live Connection</h2>
+        <p>Copy this into your <code>index.html</code>. Watch how <code>ng-init</code> sets the starting point and <code>ng-model</code> keeps the conversation going.</p>
         
-        <h3>Common Directives:</h3>
-        <ul>
-            <li><strong>ng-app:</strong> Initializes an AngularJS application.</li>
-            <li><strong>ng-init:</strong> Defines initial values for an application.</li>
-            <li><strong>ng-model:</strong> Binds the value of HTML controls (input, select, textarea) to application data.</li>
-        </ul>
-        <p class="back-link"><a href="index.html">← Back to Home</a></p>
-    </div>
+        <div class="code-lab">
+            <span class="lab-header">// DIRECTIVE PLAYGROUND</span>
+            <pre><code>&lt;div ng-app="" ng-init="name='Sonali'"&gt;
+    &lt;p&gt;Enter Name: &lt;input type="text" ng-model="name"&gt;&lt;/p&gt;
+    
+    &lt;!-- Using two different ways to display --&gt;
+    &lt;h3&gt;Hello {{ name }}&lt;/h3&gt;
+    &lt;p ng-bind="name"&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+    </section>
+
+    <section>
+        <h2>Why It Matters</h2>
+        <p>Before AngularJS, you had to write heavy JavaScript to update the screen every time a user typed a letter. With directives, your HTML is no longer "dumb"—it reacts, updates, and responds with zero manual DOM manipulation.</p>
+    </section>
+
+    <footer class="interaction-footer">
+        <p style="font-weight: 600; color: #555;">How did you like this explanation or how could it be improved?</p>
+        <div class="comment-box">
+            <input type="text" placeholder="Add a comment or ask a doubt...">
+            <button onclick="alert('Thanks for your feedback!')">Post</button>
+        </div>
+        <div style="margin-top: 20px; text-align: center;">
+            <button style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Download as PDF</button>
+        </div>
+    </footer>
+</div>
+
 </body>
 </html>

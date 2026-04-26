@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Curriculum | AngularJS Hub</title>
+    <style>
+        :root { --primary: #dd0031; --dark: #202124; --bg: #f8f9fa; --success: #28a745; --grey: #bdc3c7; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; padding: 20px; }
+        .curriculum-container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        h1 { color: var(--primary); text-align: center; margin-bottom: 30px; font-weight: 700; }
+        
+        .day-list { list-style: none; padding: 0; }
+        .day-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 18px 25px; 
+            border-bottom: 1px solid #f0f0f0; 
+            transition: 0.2s;
+        }
+        .day-item:hover { background: #fffafa; }
+        .day-item a { text-decoration: none; color: var(--dark); font-weight: 500; flex-grow: 1; }
+        
+        /* Interactive Toggle Badge */
+        .status-badge { 
+            font-size: 0.7rem; 
+            font-weight: 800; 
+            padding: 6px 14px; 
+            border-radius: 30px; 
+            cursor: pointer; 
+            text-transform: uppercase;
+            border: 2px solid;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            user-select: none;
+            min-width: 85px;
+            text-align: center;
+        }
+
+        /* Default: Unchecked State */
+        .status-unchecked { color: var(--grey); border-color: var(--grey); background: transparent; }
+        
+        /* Completed State */
+        .status-completed { color: white; border-color: var(--success); background: var(--success); box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2); }
+
+        .footer-nav { text-align: center; margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="curriculum-container">
+    <h1>AngularJS Masterclass</h1>
+    
+    <ul class="day-list" id="curriculumList">
+        </ul>
+
+    <div class="footer-nav">
+        <a href="index.html#blogs" class="back-nav">← Back to Curriculum</a>
+    </div>
+</div>
+
+<script>
+    // 1. Initial State: Load progress from localStorage
+    let savedProgress = JSON.parse(localStorage.getItem('angularMasterclassProgress')) || {};
+
+    const blogTitles = [
+        "The Dawn of AngularJS", "Setup & Environment", "The MVC Architecture", 
+        "Powering HTML with Directives", "Two-Way Data Binding", "Expressions & Scopes",
+        "Controllers in Depth", "Filters & Formatting", "Global API", "AngularJS Modules",
+        "Handling Forms", "Validation Rules", "Services & Factories", "Dependency Injection",
+        "Routing with ngRoute", "Custom Directives", "Ajax with $http", "Event Handling",
+        "Best Practices", "Deployment & Future"
+    ];
+
+    const listContainer = document.getElementById('curriculumList');
+
+    blogTitles.forEach((title, index) => {
+        const li = document.createElement('li');
+        li.className = 'day-item';
+        
+        const dayNum = (index + 1).toString().padStart(2, '0');
+        const storageKey = `day${dayNum}`; // e.g., 'day01'
+
+        // 2. Determine initial badge status from saved data
+        let currentStatus = savedProgress[storageKey] || 'Unchecked';
+        let statusClass = currentStatus === 'Completed' ? 'status-completed' : 'status-unchecked';
+
+        li.innerHTML = `
+            <a href="blog${index + 1}.html">Day ${dayNum}: ${title}</a>
+            <span class="status-badge ${statusClass}" 
+                  data-key="${storageKey}" 
+                  onclick="toggleStatus(this)">${currentStatus}</span>
+        `;
+        listContainer.appendChild(li);
+    });
+
+    // 3. Updated Function to toggle AND save progress
+    function toggleStatus(element) {
+        let storageKey = element.getAttribute('data-key');
+        let newStatus = '';
+        
+        if (element.innerText === 'UNCHECKED') {
+            newStatus = 'Completed';
+            element.classList.remove('status-unchecked');
+            element.classList.add('status-completed');
+        } else {
+            newStatus = 'Unchecked';
+            element.classList.remove('status-completed');
+            element.classList.add('status-unchecked');
+        }
+        element.innerText = newStatus;
+
+        // 4. Save the new state back to localStorage
+        savedProgress[storageKey] = newStatus;
+        localStorage.setItem('angularMasterclassProgress', JSON.stringify(savedProgress));
+    }
+</script>
+
+</body>
+</html>

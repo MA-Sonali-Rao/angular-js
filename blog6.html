@@ -2,29 +2,144 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Learn how to use Controllers and the $scope object to manage data in your AngularJS applications.">
-    <title>Blog 6: Controllers & Scope</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06. Expressions & Scope | Learning Hub</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.7; color: #333; padding: 40px; background: #fafafa; }
-        .blog-box { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #eee; }
-        .download-btn { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
-        h1 { color: #dd0031; }
-        @media print { .download-btn, .back-link { display: none; } }
-        @media print { 
-    .download-btn, .back-link, a { display: none !important; } 
-    body { background: white; padding: 0; }
-    .blog-box { border: none; box-shadow: none; width: 100%; }
-}
+        :root { --primary: #dd0031; --dark: #202124; --bg: #f8f9fa; --highlight: #fff5f5; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.8; color: #333; margin: 0; background: var(--bg); }
+        .container { max-width: 850px; margin: 40px auto; background: white; padding: 60px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
         
+        .back-nav { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .back-nav:hover { transform: translateX(-5px); }
+        
+        h1 { color: var(--primary); font-size: 2.8rem; margin-bottom: 20px; }
+        h2 { color: var(--dark); margin-top: 45px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        p { margin-bottom: 25px; font-size: 1.15rem; color: #444; }
+
+        /* Messenger Box */
+        .messenger-box { 
+            background: var(--highlight); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 2px solid #fecaca; 
+            margin: 30px 0; 
+            position: relative;
+        }
+        .messenger-box b { color: var(--primary); font-size: 1.2rem; }
+        
+        /* Code Block */
+        .code-lab {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 30px 0;
+            border-left: 8px solid #61afef;
+        }
+        .token { color: #c678dd; } /* Color for {{ }} */
+
+        .interaction-footer { margin-top: 80px; padding-top: 40px; border-top: 2px solid #f0f0f0; }
+        .comment-box { display: flex; gap: 15px; margin-top: 20px; }
+        .comment-box input { flex: 1; padding: 15px 25px; border-radius: 30px; border: 1px solid #ddd; outline: none; }
+        .comment-box button { background: var(--primary); color: white; border: none; padding: 0 35px; border-radius: 30px; cursor: pointer; font-weight: 600; }
+    /* Styling for the button on screen */
+.download-btn { 
+    background: #28a745; 
+    color: white; 
+    padding: 12px 25px; 
+    border: none; 
+    border-radius: 30px; 
+    cursor: pointer; 
+    font-weight: 600;
+    margin-bottom: 25px; 
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.download-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* Print Logic */
+@media print { 
+    /* Hide the button, the back link, and the comment section in the PDF */
+    .download-btn, .back-nav, .interaction-footer, button { 
+        display: none !important; 
+    } 
+    body { background: white; padding: 0; }
+    .container { 
+        border: none; 
+        box-shadow: none; 
+        width: 100%; 
+        max-width: 100%; 
+        padding: 0; 
+        margin: 0;
+    }
+    h1 { color: #000; }
+}
     </style>
 </head>
 <body>
-    <div class="blog-box">
-        <button class="download-btn" onclick="window.print()">Download as PDF</button>
-        <h1>Blog 6: Controllers & Scope</h1>
-        <p>The <strong>Controller</strong> is a JavaScript object that contains attributes/properties and functions. The <strong>$scope</strong> is the glue between the controller and the view.</p>
-        <p>Think of the Controller as the manager and the $scope as the clipboard the manager uses to pass information to the workers (the View).</p>
-        <p class="back-link"><a href="index.html">← Back to Home</a></p>
+
+<div class="container">
+    <a href="index.html#blogs" class="back-nav">← Back to Curriculum</a>
+    <button class="download-btn" onclick="window.print()">
+        📥 Download Lesson as PDF
+    </button>
+    
+    <h1>Expressions & Scope</h1>
+
+    <section>
+        <h2>How Does HTML Talk to JavaScript?</h2>
+        <p>At first, AngularJS feels like magic. You write something in JavaScript… and it just appears in your HTML. But how does the HTML even know what’s happening? The answer lies in two concepts: <strong>Expressions</strong> and <strong>$scope</strong>.</p>
+    </section>
+
+    <div class="messenger-box">
+        <b>$scope: The Messenger 📬</b>
+        <p>Think of your app as a brain (Controller) and a face (View). $scope is the postman. The Controller writes the letter (data), and $scope carries it to the View to be displayed.</p>
     </div>
+
+    <section>
+        <h2>The "Mad Libs" of HTML</h2>
+        <p>Expressions are the placeholders in your HTML. Like a Mad Libs book with blanks to fill in, <code>{{ name }}</code> tells Angular to grab whatever the $scope postman is carrying and drop it right there.</p>
+        
+        <div class="code-lab">
+            <pre><code>// 1. Controller defines the "letter"
+app.controller("myCtrl", function($scope) {
+    $scope.name = "Sonali";
+});
+
+&lt;!-- 2. HTML uses the "placeholder" --&gt;
+&lt;h1&gt;Hello <span class="token">{{</span> name <span class="token">}}</span>&lt;/h1&gt;</code></pre>
+        </div>
+    </section>
+
+    <section>
+        <h2>Thinking Inside the Braces</h2>
+        <p>Expressions can do more than just show variables—they can calculate! Angular lets your HTML "think" a little by performing math or string combinations on the fly.</p>
+        <ul style="font-size: 1.1rem; color: #444;">
+            <li><strong>Math:</strong> <code>{{ 5 + 5 }}</code> results in 10</li>
+            <li><strong>Logic:</strong> <code>{{ name + " is learning" }}</code> results in "Sonali is learning"</li>
+        </ul>
+    </section>
+
+    
+
+    <section>
+        <h2>Why This Matters</h2>
+        <p>Before AngularJS, you had to manually connect your logic and your design. Now, they feel like one system. Communication is automatic, and your code stays clean. Remember: <strong>$scope sends, {{ }} shows.</strong></p>
+    </section>
+
+    <footer class="interaction-footer">
+        <p style="font-weight: 600; color: #555;">Did the Postman analogy make $scope clearer? Let us know!</p>
+        <div class="comment-box">
+            <input type="text" placeholder="Write a comment...">
+            <button onclick="alert('Thanks for your feedback!')">Post</button>
+        </div>
+    </footer>
+</div>
+
 </body>
 </html>
