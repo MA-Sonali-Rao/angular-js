@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="regApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Register | Angular.js Pro</title>
+    <style>
+        :root { --primary: #dd0031; --dark: #202124; --bg: #f8f9fa; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .reg-card { background: white; padding: 40px; border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); width: 100%; max-width: 400px; border-top: 8px solid var(--primary); }
+        h2 { color: var(--dark); text-align: center; margin-bottom: 30px; }
+        input { width: 90%; padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; outline: none; }
+        input.ng-invalid.ng-touched { border-color: var(--primary); }
+        .btn-reg { background: var(--primary); color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+        .error-msg { color: var(--primary); font-size: 0.8rem; margin-top: -15px; margin-bottom: 15px; }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="RegCtrl">
+
+<div class="reg-card">
+    <h2>Join the Masterclass</h2>
+    <form name="regForm" ng-submit="submitForm()" novalidate>
+        
+        <input type="text" name="uName" ng-model="user.name" placeholder="Full Name" required>
+        
+        <input type="email" name="uEmail" ng-model="user.email" placeholder="Email Address" required>
+        <p class="error-msg" ng-show="regForm.uEmail.$touched && regForm.uEmail.$invalid">Please enter a valid email.</p>
+
+        <input type="password" name="uPass" ng-model="user.password" placeholder="Password (min 6 chars)" ng-minlength="6" required>
+        
+        <button type="submit" class="btn-reg" ng-disabled="regForm.$invalid">Create Account</button>
+    </form>
+    <p style="text-align: center; margin-top: 20px;"><a href="index.html" style="color: #666; text-decoration: none;">← Back to Home</a></p>
+</div>
+
+<script>
+    var app = angular.module('regApp', []);
+    app.controller('RegCtrl', function($scope) {
+        $scope.user = {};
+        $scope.submitForm = function() {
+            // Save name to localStorage to use across the site
+            localStorage.setItem('studentName', $scope.user.name);
+            alert("Registration Successful! Welcome, " + $scope.user.name);
+            window.location.href = "index.html";
+        };
+    });
+</script>
+
+</body>
+</html>
